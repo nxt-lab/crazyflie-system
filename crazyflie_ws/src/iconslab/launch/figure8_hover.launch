@@ -10,7 +10,7 @@
   <node name="rviz" pkg="rviz" type="rviz"
         args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>
 
-  <node name="circleGoal" pkg="iconslab" type="goalChangeFigure8.py"/>
+  <node name="figure8Goal" pkg="iconslab" type="goalChangeFigure8.py"/>
   <group ns="crazyflie">
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 

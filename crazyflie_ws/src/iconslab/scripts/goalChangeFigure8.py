@@ -6,7 +6,7 @@ from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Time
 
 def circleGoal():
-    rospy.init_node('circleGoal', anonymous=True)
+    rospy.init_node('figure8Goal', anonymous=True)
 
     pubname = rospy.Publisher('goal', PoseStamped, queue_size=10) 
     pubtime = rospy.Publisher('time', Time, queue_size=10)
