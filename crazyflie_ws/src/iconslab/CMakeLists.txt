@@ -7,8 +7,12 @@ project(iconslab)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  crazyflie_cpp
 
+  )
+
+find_package(Boost REQUIRED COMPONENTS program_options REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -99,9 +103,10 @@ find_package(catkin REQUIRED)
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+ CATKIN_DEPENDS
+   crazyflie_cpp
 #  INCLUDE_DIRS include
 #  LIBRARIES iconslab
-#  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
 
@@ -112,8 +117,17 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
+  ${Boost_LIBRARIES}
+  )
+
+add_executable(scan_address
+  src/scan_address.cpp
+)
+
+target_link_libraries(scan_address
+  ${catkin_LIBRARIES}
+  ${Boost_LIBRARIES}
 )
 
 ## Declare a C++ library
