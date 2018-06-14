@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
 import rospy
-import numpy
 import math
 from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Time
 
-def figure8Goal():
-    rospy.init_node('figure8Goal', anonymous=True)
+def roseGoal():
+    rospy.init_node('roseGoal', anonymous=True)
 
     pubname = rospy.Publisher('goal', PoseStamped, queue_size=10) 
     pubtime = rospy.Publisher('time', Time, queue_size=10)
@@ -16,13 +15,22 @@ def figure8Goal():
     rate = rospy.Rate(loop_rate)
     radians = 0
     pos = PoseStamped()
-    radius = 0.5
+    radius = 0.35
+    i = 0
+    while not rospy.is_shutdown() and i != 1000:
+	pos.pose.position.x = 0
+	pos.pose.position.y = 0	
+	pos.pose.position.z = 1
+	i+=1	
+	pubtime.publish(pos.header.stamp)
+        pubname.publish(pos)
+        rate.sleep()
     while not rospy.is_shutdown():
-        pos.pose.position.x = math.cos(radians) * radius
-        pos.pose.position.y = math.sin(2*radians) * radius
+	pos.pose.position.x = (2 + math.cos(4*radians)) * math.cos(radians) * radius
+        pos.pose.position.y = (2 + math.cos(4*radians)) * math.sin(radians) * radius
         pos.pose.position.z = 1
 	pubtime.publish(pos.header.stamp)
-        radians += 0.020
+        radians += 0.025
         pubname.publish(pos)
         rate.sleep()
         
@@ -30,6 +38,6 @@ def figure8Goal():
 
 if __name__=="__main__":
     try:
-        figure8Goal()
+        roseGoal()
     except rospy.ROSInterruptException:
         pass
