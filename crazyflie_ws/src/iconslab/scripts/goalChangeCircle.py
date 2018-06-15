@@ -4,11 +4,12 @@ import rospy
 import math
 from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Time
+from std_msgs.msg import String
 
 def circleGoal():
     rospy.init_node('circleGoal', anonymous=True)
 
-    y_offset = int(rospy.get_param("y"))
+    y_offset = int(rospy.get_param("~y", "0"))
 
     pubname = rospy.Publisher('goal', PoseStamped, queue_size=10) 
     pubtime = rospy.Publisher('time', Time, queue_size=10)
