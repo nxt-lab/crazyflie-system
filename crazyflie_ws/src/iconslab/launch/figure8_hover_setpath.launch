@@ -14,7 +14,7 @@
   <group ns="crazyflie">
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
-	<remap from="goal" to="/goal"/>
+    <remap from="goal" to="/goal"/>
     <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
       <param name="uri" value="$(arg uri)" />
       <param name="tf_prefix" value="crazyflie" />
@@ -28,11 +28,11 @@
     </node>
 
     <node name="joy" pkg="joy" type="joy_node" output="screen">
-     <param name="dev" value="$(arg joy_dev)" />
+      <param name="dev" value="$(arg joy_dev)" />
     </node>
 
     <node name="joystick_controller" pkg="crazyflie_demo" type="controller.py" output="screen">
-     <param name="use_crazyflie_controller" value="True" />
+      <param name="use_crazyflie_controller" value="True" />
     </node>
 
     <node name="controller_bridge" pkg="bitcraze_lps_estimator" type="crazyflie_controller_bridge.py" output="screen"/>

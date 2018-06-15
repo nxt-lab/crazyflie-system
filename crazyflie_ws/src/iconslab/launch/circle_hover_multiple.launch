@@ -11,24 +11,24 @@
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(find crazyflie_description)/urdf/crazyflie2.urdf.xacro" />
   <!--<node name="rviz" pkg="rviz" type="rviz"
-        args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>-->
+      args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>-->
 
 
   <node name="joy" pkg="joy" type="joy_node" output="screen">
-     <param name="dev" value="$(arg joy_dev)" />
+    <param name="dev" value="$(arg joy_dev)" />
   </node>
 
   <group ns="crazyflie0">
 
-  <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-    <param name="y" value="-1" />
-  </node>
+    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
+      <param name="y" value="-1" />
+    </node>
 
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
     <remap from="joy" to="/joy"/>
 
-	<!-- <remap from="goal" to="/goal"/> -->
+    <!-- <remap from="goal" to="/goal"/> -->
     <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
       <param name="uri" value="$(arg uri0)" />
       <param name="tf_prefix" value="crazyflie0" />
@@ -42,7 +42,7 @@
     </node>
 
     <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
-     <param name="use_crazyflie_controller" value="True" />
+      <param name="use_crazyflie_controller" value="True" />
     </node>
 
     <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
@@ -56,17 +56,17 @@
   </group>
 
   <group ns="crazyflie1">
-  
 
-  <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-    <param name="y" value="1"/>
-  </node>
-  
-   <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
+
+    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
+      <param name="y" value="1"/>
+    </node>
+
+    <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
     <remap from="joy" to="/joy"/>
 
-	<!--<remap from="goal" to="/goal"/>-->
+    <!--<remap from="goal" to="/goal"/>-->
     <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
       <param name="uri" value="$(arg uri1)" />
       <param name="tf_prefix" value="crazyflie1" />
@@ -80,7 +80,7 @@
     </node>
 
     <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
-     <param name="use_crazyflie_controller" value="True" />
+      <param name="use_crazyflie_controller" value="True" />
     </node>
 
     <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
