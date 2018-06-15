@@ -17,7 +17,7 @@ def roseGoal():
     pos = PoseStamped()
     radius = 0.35
     i = 0
-    while not rospy.is_shutdown() and i != 1000:
+    while not rospy.is_shutdown() and i != 500:
 	pos.pose.position.x = 0
 	pos.pose.position.y = 0	
 	pos.pose.position.z = 1

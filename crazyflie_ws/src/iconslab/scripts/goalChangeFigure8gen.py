@@ -24,6 +24,7 @@ def figure8Goal():
     loop_rate = 30
     rate = rospy.Rate(loop_rate)
     pos = PoseStamped()
+    i = 0
     while not rospy.is_shutdown() and i != 500:
         pos.pose.position.x = 0
         pos.pose.position.y = 0

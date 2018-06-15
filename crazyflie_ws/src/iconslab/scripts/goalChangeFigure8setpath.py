@@ -28,22 +28,15 @@ def figure8Goal():
 	loop_rate = 30
 	rate = rospy.Rate(loop_rate)
 	pos = PoseStamped()
-	while not rospy.is_shutdown() and i != 500:
-        pos.pose.position.x = 0
-        pos.pose.position.y = 0
-        pos.pose.position.z = 1
-        i+=1
-        pubtime.publish(pos.header.stamp)
-        pubname.publish(pos)
-        rate.sleep()
-	while not rospy.is_shutdown() and i != 500:
-        	pos.pose.position.x = 0
-        	pos.pose.position.y = 0
-        	pos.pose.position.z = 1
-        	i+=1
-        	pubtime.publish(pos.header.stamp)
-        	pubname.publish(pos)
-        	rate.sleep()
+	j = 0
+	while not rospy.is_shutdown() and j != 500:
+		pos.pose.position.x = 0
+		pos.pose.position.y = 0
+		pos.pose.position.z = 1
+		j+=1
+		pubtime.publish(pos.header.stamp)
+		pubname.publish(pos)
+		rate.sleep()
 	while not rospy.is_shutdown():
 		for i in range (0,len(coords)-1):		
 			pos.pose.position.x = coords[i][0]

@@ -8,6 +8,8 @@ from std_msgs.msg import Time
 def circleGoal():
     rospy.init_node('circleGoal', anonymous=True)
 
+    y_offset = int(rospy.get_param("y"))
+
     pubname = rospy.Publisher('goal', PoseStamped, queue_size=10) 
     pubtime = rospy.Publisher('time', Time, queue_size=10)
 
@@ -16,18 +18,18 @@ def circleGoal():
     radians = 0
     pos = PoseStamped()
     radius = 0.5
+    i = 0
     while not rospy.is_shutdown() and i != 500:
-        pos.pose.position.x = 0
-        pos.pose.position.y = 0
-        pos.pose.position.z = 1
-        i+=1
-        pubtime.publish(pos.header.stamp)
-        pubname.publish(pos)
-        rate.sleep()
-
+	pos.pose.position.x = 0
+	pos.pose.position.y = y_offset
+	pos.pose.position.z = 1
+	i+=1
+	pubtime.publish(pos.header.stamp)
+	pubname.publish(pos)
+	rate.sleep()
     while not rospy.is_shutdown():
         pos.pose.position.x = math.cos(radians) * radius
-        pos.pose.position.y = math.sin(radians) * radius
+        pos.pose.position.y = math.sin(radians) * radius + y_offset
         pos.pose.position.z = 1
 	pubtime.publish(pos.header.stamp)
         radians += 0.020
