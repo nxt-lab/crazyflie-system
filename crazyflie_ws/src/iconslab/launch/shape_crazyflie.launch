@@ -1,6 +1,25 @@
-<group ns="$(arg ns)">
+<launch>
+  <arg name="ns" default="crazyflie"/>
+  <arg name="uri"       default="radio://0/80/2M/E7E7E7E7A0"/>
+  <arg name="loop_rate" default="30"/>
+  <arg name="shape"     default="hover"/>
+  <arg name="x"         default="0"/>
+  <arg name="y"         default="0"/>
+  <arg name="z"         default="0"/>
+  <arg name="hold"      default="True"/>
+  <arg name="theta"     default="0"/>
+  <arg name="radius"    default="1"/>
 
-  <node name="shapeGoal" pkg="iconslab" type="goalChangeGeneric.py"/>
+  <param name="x" value="$(arg x)"/>
+  <param name="y" value="$(arg y)"/>
+  <param name="z" value="$(arg z)"/>
+  <param name="hold" value="$(arg hold)"/>
+  <param name="theta" value="$(arg theta)"/>
+  <param name="radius" value="$(arg radius)"/>
+  <param name="loop_rate" value="$(arg loop_rate)"/>
+  <param name="shape" value="$(arg shape)"/>
+  <node name="shapeGoal" pkg="iconslab" type="goalChangeGeneric.py">
+  </node>
 
   <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
@@ -28,4 +47,4 @@
 
   <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" />
 
-</group>
+</launch>
