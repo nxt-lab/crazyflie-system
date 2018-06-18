@@ -8,6 +8,7 @@ from std_msgs.msg import Time
 
 def figure8Goal():
 	rospy.init_node('figure8Goal', anonymous=True)
+	y_offset = float(rospy.get_param("~y", "0"))
 	pubname = rospy.Publisher('goal', PoseStamped, queue_size = 10) 
 	pubtime = rospy.Publisher('time', Time, queue_size = 10)
 	radius = 0.5
@@ -31,7 +32,7 @@ def figure8Goal():
 	j = 0
 	while not rospy.is_shutdown() and j != 500:
 		pos.pose.position.x = 0
-		pos.pose.position.y = 0
+		pos.pose.position.y = y_offset
 		pos.pose.position.z = 1
 		j+=1
 		pubtime.publish(pos.header.stamp)
@@ -40,7 +41,7 @@ def figure8Goal():
 	while not rospy.is_shutdown():
 		for i in range (0,len(coords)-1):		
 			pos.pose.position.x = coords[i][0]
-			pos.pose.position.y = coords[i][1]
+			pos.pose.position.y = coords[i][1]+y_offset
 			pos.pose.position.z = coords[i][2]
 			pubtime.publish(pos.header.stamp)
 			pubname.publish(pos)

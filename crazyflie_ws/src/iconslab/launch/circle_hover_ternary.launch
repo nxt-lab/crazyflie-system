@@ -1,6 +1,7 @@
 <launch>
   <arg name="uri0" default="radio://0/80/2M/E7E7E7E7A0" />
-  <arg name="uri1" default="radio://0/80/2M/E7E7E7E7C0" />
+  <arg name="uri1" default="radio://0/80/2M/E7E7E7E7B0" />
+  <arg name="uri2" default="radio://0/80/2M/E7E7E7E7C0" />
   <arg name="frame" default="base_link" />
   <arg name="joy_dev" default="/dev/input/js0"/>
 
@@ -18,7 +19,7 @@
   <group ns="crazyflie0">
 
     <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-      <param name="y" value="-1" />
+      <param name="hold" value="False"/>
     </node>
 
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
@@ -56,7 +57,8 @@
 
 
     <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-      <param name="y" value="1"/>
+      <param name="hold" value="False"/>
+      <param name="radians" value="2.09"/>
     </node>
 
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
@@ -90,6 +92,45 @@
 
   </group>
 
+
+    <group ns="crazyflie2">
+
+
+    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
+      <param name="hold" value="False"/>
+      <param name="radians" value="4.19"/>
+    </node>
+
+    <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
+
+    <remap from="joy" to="/joy"/>
+
+    <!--<remap from="goal" to="/goal"/>-->
+    <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
+      <param name="uri" value="$(arg uri2)" />
+      <param name="tf_prefix" value="crazyflie2" />
+      <rosparam>
+        genericLogTopics: ["log_kfpos", "log_kfqt", "log_ranges"]
+        genericLogTopicFrequencies: [30, 30, 30]
+        genericLogTopic_log_kfpos_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
+        genericLogTopic_log_kfqt_Variables: ["kalman.q0", "kalman.q1", "kalman.q2", "kalman.q3"]
+        genericLogTopic_log_ranges_Variables: ["ranging.distance0", "ranging.distance1", "ranging.distance2", "ranging.distance3", "ranging.distance4", "ranging.distance5", "ranging.state"]
+      </rosparam>
+    </node>
+
+    <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
+      <param name="use_crazyflie_controller" value="True" />
+    </node>
+
+    <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
+
+    <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/>
+
+    <node name="lps_viz" pkg="bitcraze_lps_estimator" type="lps_viz.py" />
+
+    <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" />
+
+  </group>
 
   <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster"
         args="1 0 0 0 0 0 1 world lps 100" />

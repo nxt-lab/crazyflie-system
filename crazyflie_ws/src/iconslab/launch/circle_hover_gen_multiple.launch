@@ -1,6 +1,6 @@
 <launch>
   <arg name="uri0" default="radio://0/80/2M/E7E7E7E7A0" />
-  <arg name="uri1" default="radio://0/80/2M/E7E7E7E7C0" />
+  <arg name="uri1" default="radio://0/80/2M/E7E7E7E7B0" />
   <arg name="frame" default="base_link" />
   <arg name="joy_dev" default="/dev/input/js0"/>
 
@@ -14,18 +14,16 @@
   <node name="joy" pkg="joy" type="joy_node" output="screen">
     <param name="dev" value="$(arg joy_dev)" />
   </node>
-
+  <param name="shape" value="circle"/>
   <group ns="crazyflie0">
 
-    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-      <param name="y" value="-1" />
-    </node>
+    <param name="y" value="-1" />
+    <node name="circleGoal" pkg="iconslab" type="goalChangeGeneric.py"/>
 
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
     <remap from="joy" to="/joy"/>
 
-    <!-- <remap from="goal" to="/goal"/> -->
     <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
       <param name="uri" value="$(arg uri0)" />
       <param name="tf_prefix" value="crazyflie0" />
@@ -54,10 +52,8 @@
 
   <group ns="crazyflie1">
 
-
-    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py">
-      <param name="y" value="1"/>
-    </node>
+    <param name="y" value="1" />
+    <node name="circleGoal" pkg="iconslab" type="goalChangeCircle.py"/>
 
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 
