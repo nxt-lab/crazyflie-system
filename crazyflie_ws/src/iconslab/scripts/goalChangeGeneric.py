@@ -26,7 +26,7 @@ def shapeGoal():
     z_offset = float(rospy.get_param("z", "0"))
     theta = float(rospy.get_param("theta", "0"))
     hold_center = bool(rospy.get_param("hold", "True"))
-    radius = float(rospy.get_param("radius", "1"))
+    radius = float(rospy.get_param("radius", "0.5"))
     delay = int(rospy.get_param("delay", "5000")) * loop_rate /1000
     shape = rospy.get_param("shape", "hover")
 
@@ -37,7 +37,6 @@ def shapeGoal():
 
     rate = rospy.Rate(loop_rate)
     pos = PoseStamped()
-    radius = 0.5
     i = 0
     while hold_center and not rospy.is_shutdown() and i != delay:
         pos.pose.position.x = x_offset
