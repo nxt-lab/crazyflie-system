@@ -13,7 +13,7 @@
   </node>
 
   <group ns="crazyflie0">
-    <remap from="joy" to="$(arg joy)"/>
+    <remap from="joy" to="/joy"/>
     <include file="$(find iconslab)/launch/shape_crazyflie.launch">
       <arg name="ns" value="crazyflie0"/>
       <arg name="uri" value="$(arg uri0)"/>
@@ -23,8 +23,8 @@
     </include>
   </group>
 
-  <group ns="crazyflie0">
-    <remap from="joy" to="crazyflie1"/>
+  <group ns="crazyflie1">
+    <remap from="joy" to="/joy"/>
     <include file="$(find iconslab)/launch/shape_crazyflie.launch">
       <arg name="ns" value="crazyflie1"/>
       <arg name="uri" value="$(arg uri1)"/>
