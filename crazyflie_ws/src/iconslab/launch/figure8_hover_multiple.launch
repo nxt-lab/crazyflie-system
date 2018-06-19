@@ -17,118 +17,34 @@
   </node>
 
   <group ns="crazyflie0">
-
-    <node name="figure8Goal" pkg="iconslab" type="goalChangeFigure8setpath.py">
-      <param name="y" value="-0.5" />
-    </node>
-
-    <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
-
     <remap from="joy" to="/joy"/>
-
-    <!-- <remap from="goal" to="/goal"/> -->
-    <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
-      <param name="uri" value="$(arg uri0)" />
-      <param name="tf_prefix" value="crazyflie0" />
-      <rosparam>
-        genericLogTopics: ["log_kfpos", "log_kfqt", "log_ranges"]
-        genericLogTopicFrequencies: [30, 30, 30]
-        genericLogTopic_log_kfpos_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
-        genericLogTopic_log_kfqt_Variables: ["kalman.q0", "kalman.q1", "kalman.q2", "kalman.q3"]
-        genericLogTopic_log_ranges_Variables: ["ranging.distance0", "ranging.distance1", "ranging.distance2", "ranging.distance3", "ranging.distance4", "ranging.distance5", "ranging.state"]
-      </rosparam>
-    </node>
-
-    <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
-      <param name="use_crazyflie_controller" value="True" />
-    </node>
-
-    <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
-
-    <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/>
-
-    <node name="lps_viz" pkg="bitcraze_lps_estimator" type="lps_viz.py" />
-
-    <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" />
-
+    <include file="$(find iconslab)/launch/shape_crazyflie.launch">
+      <arg name="ns" value="crazyflie0"/>
+      <arg name="uri" value="$(arg uri0)"/>
+      <arg name="shape" value="figure8"/>
+      <arg name="y" value="-0.5"/>
+    </include>
   </group>
 
-  <!-- <group ns="crazyflie1"> -->
-
-
-  <!--   <node name="figure8Goal" pkg="iconslab" type="goalChangeFigure8setpath.py"> -->
-  <!--     <param name="y" value="0"/> -->
-  <!--   </node> -->
-
-  <!--   <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" /> -->
-
-  <!--   <remap from="joy" to="/joy"/> -->
-
-  <!--   <!-\-<remap from="goal" to="/goal"/>-\-> -->
-  <!--   <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen"> -->
-  <!--     <param name="uri" value="$(arg uri1)" /> -->
-  <!--     <param name="tf_prefix" value="crazyflie1" /> -->
-  <!--     <rosparam> -->
-  <!--       genericLogTopics: ["log_kfpos", "log_kfqt", "log_ranges"] -->
-  <!--       genericLogTopicFrequencies: [30, 30, 30] -->
-  <!--       genericLogTopic_log_kfpos_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"] -->
-  <!--       genericLogTopic_log_kfqt_Variables: ["kalman.q0", "kalman.q1", "kalman.q2", "kalman.q3"] -->
-  <!--       genericLogTopic_log_ranges_Variables: ["ranging.distance0", "ranging.distance1", "ranging.distance2", "ranging.distance3", "ranging.distance4", "ranging.distance5", "ranging.state"] -->
-  <!--     </rosparam> -->
-  <!--   </node> -->
-
-  <!--   <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen"> -->
-  <!--     <param name="use_crazyflie_controller" value="True" /> -->
-  <!--   </node> -->
-
-  <!--   <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/> -->
-
-  <!--   <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/> -->
-
-  <!--   <node name="lps_viz" pkg="bitcraze_lps_estimator" type="lps_viz.py" /> -->
-
-  <!--   <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" /> -->
-
-  <!-- </group> -->
+  <group ns="crazyflie1">
+    <remap from="joy" to="/joy"/>
+    <include file="$(find iconslab)/launch/shape_crazyflie.launch">
+      <arg name="ns" value="crazyflie1"/>
+      <arg name="uri" value="$(arg uri1)"/>
+      <arg name="shape" value="figure8"/>
+      <arg name="y" value="0"/>
+    </include>
+  </group>
 
   <group ns="crazyflie2">
-
-
-    <node name="figure8Goal" pkg="iconslab" type="goalChangeFigure8setpath.py">
-      <param name="y" value="0.5"/>
-    </node>
-
-    <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
-
     <remap from="joy" to="/joy"/>
-
-    <!--<remap from="goal" to="/goal"/>-->
-    <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
-      <param name="uri" value="$(arg uri2)" />
-      <param name="tf_prefix" value="crazyflie2" />
-      <rosparam>
-        genericLogTopics: ["log_kfpos", "log_kfqt", "log_ranges"]
-        genericLogTopicFrequencies: [30, 30, 30]
-        genericLogTopic_log_kfpos_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
-        genericLogTopic_log_kfqt_Variables: ["kalman.q0", "kalman.q1", "kalman.q2", "kalman.q3"]
-        genericLogTopic_log_ranges_Variables: ["ranging.distance0", "ranging.distance1", "ranging.distance2", "ranging.distance3", "ranging.distance4", "ranging.distance5", "ranging.state"]
-      </rosparam>
-    </node>
-
-    <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
-      <param name="use_crazyflie_controller" value="True" />
-    </node>
-
-    <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
-
-    <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/>
-
-    <node name="lps_viz" pkg="bitcraze_lps_estimator" type="lps_viz.py" />
-
-    <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" />
-
+    <include file="$(find iconslab)/launch/shape_crazyflie.launch">
+      <arg name="ns" value="crazyflie2"/>
+      <arg name="uri" value="$(arg uri2)"/>
+      <arg name="shape" value="figure8"/>
+      <arg name="y" value="0.5"/>
+    </include>
   </group>
-
 
   <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster"
         args="1 0 0 0 0 0 1 world lps 100" />

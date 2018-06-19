@@ -7,15 +7,23 @@ from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Time
 
 def hover(x):
-    return (0,0,1)
+    return (0,0,0)
 
 def circleShape(theta):
-    return (math.cos(theta), math.sin(theta), 1)
+    return (math.cos(theta), math.sin(theta), 0)
 
 def figure8(theta):
-    return (math.cos(theta),  math.sin(2*theta), 1)
+    return (math.cos(theta),  math.sin(2*theta), 0)
 
-shapeFuncs = {"circle":circleShape, "hover":hover, "figure8":figure8}
+def rose(theta):
+    part = 2 + math.cos(4*theta)
+    x = part * math.cos(theta)
+    y = part * math.sin(theta)
+    z = 1
+    return (x,y,z)
+
+
+shapeFuncs = {"circle":circleShape, "hover":hover, "figure8":figure8, "rose":rose}
 
 def shapeGoal():
     rospy.init_node('shapeGoal', anonymous=True)
@@ -23,7 +31,7 @@ def shapeGoal():
     loop_rate = int(rospy.get_param("loop_rate", "30"))
     x_offset = float(rospy.get_param("x", "0"))
     y_offset = float(rospy.get_param("y", "0"))
-    z_offset = float(rospy.get_param("z", "0"))
+    z_offset = float(rospy.get_param("z", "1"))
     theta = float(rospy.get_param("theta", "0"))
     hold_center = bool(rospy.get_param("hold", "True"))
     radius = float(rospy.get_param("radius", "0.5"))
@@ -41,7 +49,7 @@ def shapeGoal():
     while hold_center and not rospy.is_shutdown() and i != delay:
         pos.pose.position.x = x_offset
         pos.pose.position.y = y_offset
-        pos.pose.position.z = 1
+        pos.pose.position.z = z_offset
         i+=1
         pubtime.publish(pos.header.stamp)
         pubname.publish(pos)

@@ -18,8 +18,8 @@
       <arg name="ns" value="crazyflie0"/>
       <arg name="uri" value="$(arg uri0)"/>
       <arg name="shape" value="circle"/>
-      <arg name="hold" value="False"/>
       <arg name="theta" value="0"/>
+      <arg name="y" value="-1"/>
     </include>
   </group>
 
@@ -29,8 +29,8 @@
       <arg name="ns" value="crazyflie1"/>
       <arg name="uri" value="$(arg uri1)"/>
       <arg name="shape" value="circle"/>
-      <arg name="hold" value="False"/>
-      <arg name="theta" value="3.14"/>
+      <arg name="theta" value="0"/>
+      <arg name="y" value="1"/>
     </include>
   </group>
 

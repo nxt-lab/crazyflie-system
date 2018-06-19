@@ -5,10 +5,10 @@
   <arg name="shape"     default="hover"/>
   <arg name="x"         default="0"/>
   <arg name="y"         default="0"/>
-  <arg name="z"         default="0"/>
+  <arg name="z"         default="1"/>
   <arg name="hold"      default="True"/>
   <arg name="theta"     default="0"/>
-  <arg name="radius"    default="1"/>
+  <arg name="radius"    default="0.5"/>
 
   <param name="x" value="$(arg x)"/>
   <param name="y" value="$(arg y)"/>
@@ -35,11 +35,11 @@
     </rosparam>
   </node>
 
-  <node name="joystick_controller" pkg="iconslab" type="controller.py" output="screen">
+  <node name="joystick_controller" pkg="crazyflie_demo" type="controller.py" output="screen">
     <param name="use_crazyflie_controller" value="True" />
   </node>
 
-  <node name="controller_bridge" pkg="iconslab" type="crazyflie_controller_bridge.py" output="screen"/>
+  <node name="controller_bridge" pkg="bitcraze_lps_estimator" type="crazyflie_controller_bridge.py" output="screen"/>
 
   <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/>
 
