@@ -1,6 +1,7 @@
 <launch>
   <arg name="ns" default="crazyflie"/>
   <arg name="uri"       default="radio://0/80/2M/E7E7E7E7A0"/>
+
   <arg name="loop_rate" default="30"/>
   <arg name="shape"     default="hover"/>
   <arg name="x"         default="0"/>
@@ -18,33 +19,13 @@
   <param name="radius" value="$(arg radius)"/>
   <param name="loop_rate" value="$(arg loop_rate)"/>
   <param name="shape" value="$(arg shape)"/>
+
   <node name="shapeGoal" pkg="iconslab" type="goalChangeGeneric.py">
   </node>
 
-  <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
-
-  <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
-    <param name="uri" value="$(arg uri)" />
-    <param name="tf_prefix" value="$(arg ns)" />
-    <rosparam>
-      genericLogTopics: ["log_kfpos", "log_kfqt", "log_ranges"]
-      genericLogTopicFrequencies: [30, 30, 30]
-      genericLogTopic_log_kfpos_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
-      genericLogTopic_log_kfqt_Variables: ["kalman.q0", "kalman.q1", "kalman.q2", "kalman.q3"]
-      genericLogTopic_log_ranges_Variables: ["ranging.distance0", "ranging.distance1", "ranging.distance2", "ranging.distance3", "ranging.distance4", "ranging.distance5", "ranging.state"]
-    </rosparam>
-  </node>
-
-  <node name="joystick_controller" pkg="crazyflie_demo" type="controller.py" output="screen">
-    <param name="use_crazyflie_controller" value="True" />
-  </node>
-
-  <node name="controller_bridge" pkg="bitcraze_lps_estimator" type="crazyflie_controller_bridge.py" output="screen"/>
-
-  <node name="lps_efk_bridge" pkg="bitcraze_lps_estimator" type="lps_ekf_bridge.py" output="screen"/>
-
-  <node name="lps_viz" pkg="bitcraze_lps_estimator" type="lps_viz.py" />
-
-  <node name="log_range" pkg="bitcraze_lps_estimator" type="log_range.py" />
+  <include file="$(find iconslab)/launch/crazyflie.launch">
+      <arg name="ns" value="crazyflie"/>
+      <arg name="uri" value="$(arg uri)"/>
+  </include>
 
 </launch>
