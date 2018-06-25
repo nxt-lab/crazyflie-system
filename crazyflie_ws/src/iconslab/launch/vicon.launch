@@ -1,0 +1,4 @@
+<launch>
+      <remap to="/tf_old" from="tf"/>
+      <include file="$(find vicon_bridge)/launch/vicon.launch"/>
+</launch>

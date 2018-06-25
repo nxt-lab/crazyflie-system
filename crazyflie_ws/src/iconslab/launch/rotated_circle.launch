@@ -10,9 +10,7 @@
   <node name="rviz" pkg="rviz" type="rviz"
         args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>
 
-  <node name="roseGoal" pkg="iconslab" type="goalChangeRose.py">
-    <param name = "y_offset" value = "0"/>
-  </node>
+  <node name="rotCircleGoal" pkg="iconslab" type="rotateCircle.py"/>
   <group ns="crazyflie">
     <rosparam command="load" file="$(find bitcraze_lps_estimator)/data/anchor_pos.yaml" />
 

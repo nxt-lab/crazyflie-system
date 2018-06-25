@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 {
 
   std::string addressStr;
-  std::string defaultAddressStr("0xE7E7E7E799");
+  std::string defaultAddressStr("0xE7E7E7E700");
   bool verbose = false;
 
   namespace po = boost::program_options;
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	  uint8_t channel = 80;
       for (uint8_t datarate = 0; datarate < 3; ++datarate) {
         radio.setDatarate((Crazyradio::Datarate)datarate);
-        for (uint8_t addressOff = 0; addressOff <= 125; ++addressOff) {
+        for (uint8_t addressOff = 0; addressOff <= 255; ++addressOff) {
 			radio.setAddress(address + addressOff);
 			radio.setChannel(channel);
 
