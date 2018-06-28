@@ -6,6 +6,10 @@
   <arg name="y" default="0.0" />
   <arg name="z" default="1.0" />
 
+  <include file="$(find iconslab)/launch/controller.launch">
+    <arg name="joy_dev" value="$(arg joy_dev)"/>
+  </include>
+
   <group ns="crazyflie">
     <remap from="joy" to="/joy"/>
     <include file="$(find iconslab)/launch/shape_crazyflie.launch">

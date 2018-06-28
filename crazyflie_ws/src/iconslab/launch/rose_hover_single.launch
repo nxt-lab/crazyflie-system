@@ -10,6 +10,10 @@
   <node name="rviz" pkg="rviz" type="rviz"
         args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>
 
+  <include file="$(find iconslab)/launch/controller.launch">
+    <arg name="joy_dev" value="$(arg joy_dev)"/>
+  </include>
+
   <node name="roseGoal" pkg="iconslab" type="goalChangeRose.py"/>
   <group ns="crazyflie">
     <remap from="joy" to="/joy"/>

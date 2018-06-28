@@ -12,9 +12,9 @@
       args="-d $(find bitcraze_lps_estimator)/data/rvizconfig_with_goal.rviz"/>-->
 
 
-  <node name="joy" pkg="joy" type="joy_node" output="screen">
-    <param name="dev" value="$(arg joy_dev)" />
-  </node>
+  <include file="$(find iconslab)/launch/controller.launch">
+    <arg name="joy_dev" value="$(arg joy_dev)"/>
+  </include>
 
   <group ns="crazyflie0">
     <remap from="joy" to="/joy"/>
