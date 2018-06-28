@@ -78,8 +78,16 @@ int main(int argc, char **argv)
       std::cout << "      \"" << i << "\": [" << point.x << "," << point.y << "," << point.z << "]" << std::endl;
     }
 
+    std::vector<libmotioncapture::Object> mocapObjects;
+	mocapObjects.clear();
+	mocap->getObjects(mocapObjects);
+	std::cout << "    objects:" << std::endl;
+	for (int i = 0; i < mocapObjects.size(); i++){
+		libmotioncapture::Object obj = mocapObjects[i];
+		std::cout << "      " << obj.name() << ": [" << obj.position().x() << ", " << obj.position().y() << ", " << obj.position().z() << "]" << std::endl;
+	}
 
-    ros::spinOnce();
+	ros::spinOnce();
   }
 
   return 0;
