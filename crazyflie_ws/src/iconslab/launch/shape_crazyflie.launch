@@ -20,7 +20,7 @@
   <param name="loop_rate" value="$(arg loop_rate)"/>
   <param name="shape" value="$(arg shape)"/>
 
-  <node name="shapeGoal" pkg="iconslab" type="goalChangeGeneric.py">
+  <node name="shapeGoal" pkg="iconslab" type="goalChangeGeneric.py" output="screen">
   </node>
 
   <include file="$(find iconslab)/launch/crazyflie.launch">

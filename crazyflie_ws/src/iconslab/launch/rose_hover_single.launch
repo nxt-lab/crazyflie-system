@@ -14,7 +14,7 @@
     <arg name="joy_dev" value="$(arg joy_dev)"/>
   </include>
 
-  <node name="roseGoal" pkg="iconslab" type="goalChangeRose.py"/>
+  <node name="roseGoal" pkg="iconslab" type="goalChangeRose.py" output="screen"/>
   <group ns="crazyflie">
     <remap from="joy" to="/joy"/>
     <include file="$(find iconslab)/launch/shape_crazyflie.launch">
