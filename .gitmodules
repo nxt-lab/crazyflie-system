@@ -1,6 +1,36 @@
-[submodule "crazyswarm_ros"]
-	path = crazyswarm_ros
-	url = https://github.com/USC-ACTLab/crazyswarm.git
 [submodule "crazyswarm"]
 	path = crazyswarm
 	url = https://github.com/nxt-lab/crazyswarm.git
+[submodule "bitcraze-mechanics"]
+	path = bitcraze-mechanics
+	url = https://github.com/bitcraze/bitcraze-mechanics
+[submodule "crazyflie-firmware"]
+	path = crazyflie-firmware
+	url = https://github.com/bitcraze/crazyflie-firmware
+[submodule "lps-tools"]
+	path = lps-tools
+	url = https://github.com/bitcraze/lps-tools
+[submodule "crazyflie-clients-python"]
+	path = crazyflie-clients-python
+	url = https://github.com/bitcraze/crazyflie-clients-python
+[submodule "crazyflie-lib-python"]
+	path = crazyflie-lib-python
+	url = https://github.com/bitcraze/crazyflie-lib-python.git
+[submodule "crazyflie_ws/src/crazyflie_ros"]
+	path = crazyflie_ws/src/crazyflie_ros
+	url = https://github.com/nxt-lab/crazyflie_ros.git
+[submodule "crazyflie_ws/src/crazyradio-firmware"]
+	path = crazyflie_ws/src/crazyradio-firmware
+	url = https://github.com/bitcraze/crazyradio-firmware.git
+[submodule "crazyflie_ws/src/hector_quadrotor"]
+	path = crazyflie_ws/src/hector_quadrotor
+	url = https://github.com/nxt-lab/hector_quadrotor.git
+[submodule "crazyflie_ws/src/lps-ros"]
+	path = crazyflie_ws/src/lps-ros
+	url = https://github.com/nxt-lab/lps-ros
+[submodule "crazyflie_ws/src/crazyflie-experiments"]
+	path = crazyflie_ws/src/crazyflie-experiments
+	url = https://github.com/nxt-lab/crazyflie-experiments
+[submodule "crazyflie_ws/src/vicon_bridge"]
+	path = crazyflie_ws/src/vicon_bridge
+	url = https://github.com/nxt-lab/vicon_bridge

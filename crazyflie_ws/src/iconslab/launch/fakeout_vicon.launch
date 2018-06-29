@@ -1,9 +1,0 @@
-<launch>
-  <arg name="vicon_data" default="$(find iconslab)/data/vicon_frame.out"/>
-
-  <param name="vicon_data" value="$(arg vicon_data)" />
-  <node name="fake_vicon" pkg="iconslab" type="fakeVicon.py" output="screen"/>
-  <node name="transformation" pkg="iconslab" type="transformVicon.py" output="screen"/>
-  <include file="$(find crazyswarm)/launch/hover_swarm.launch"/>
-
-</launch>
