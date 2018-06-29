@@ -3,4 +3,4 @@
 	url = https://github.com/USC-ACTLab/crazyswarm.git
 [submodule "crazyswarm"]
 	path = crazyswarm
-	url = https://github.com/USC-ACTLab/crazyswarm.git
+	url = https://github.com/nxt-lab/crazyswarm.git
